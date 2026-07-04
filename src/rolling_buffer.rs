@@ -132,6 +132,7 @@ mod tests {
     fn normal_types() {
         is_full::<RollingBuffer<f32, 2>>();
     }
+
     #[test]
     fn new() {
         let rb = RollingBuffer::<f32, 3>::new();

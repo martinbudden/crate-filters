@@ -113,8 +113,10 @@ mod tests {
         is_full::<SlewRateLimiter<f32>>();
         is_full::<SlewRateLimiter<f64>>();
     }
+
     #[test]
     fn biquad_filter_f32() {}
+
     #[test]
     fn slew_rate_asymmetric() {
         // Rise: 10.0 units/sec, Fall: 100.0 units/sec (Fast stop)
@@ -137,6 +139,7 @@ mod tests {
         // It should reach 0.0 in a single step.
         assert_eq!(0.0, limiter.update(0.0));
     }
+
     #[test]
     fn slew_reset() {
         let dt = 0.1;
@@ -159,6 +162,7 @@ mod tests {
         let output = limiter.update(input);
         assert_eq!(0.4, output);
     }
+
     #[test]
     fn slew_clamping() {
         let dt = 0.1;

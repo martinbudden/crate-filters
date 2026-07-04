@@ -96,6 +96,7 @@ mod tests {
     fn normal_types() {
         is_full::<MovingAverageFilter<f32, 2>>();
     }
+
     #[test]
     fn moving_average_filter_f32() {
         let mut filter = MovingAverageFilter::<f32, 3>::new();
@@ -112,6 +113,7 @@ mod tests {
         assert_eq!(12.0, filter.update(20.0));
         assert_eq!(5.0, filter.update(-9.0));
     }
+
     #[test]
     fn moving_average_filter_vector3df32() {
         use vqm::Vector3df32;

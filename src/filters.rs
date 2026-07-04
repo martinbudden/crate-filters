@@ -118,6 +118,7 @@ mod tests {
 
     #[test]
     fn normal_types() {}
+
     #[test]
     fn default() {}
 }

@@ -139,6 +139,7 @@ mod tests {
     fn normal_types() {
         is_full::<CircularBuffer<f32, 2>>();
     }
+
     #[test]
     fn new() {
         let cb = CircularBuffer::<f32, 3>::new();

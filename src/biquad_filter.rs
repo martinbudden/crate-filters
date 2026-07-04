@@ -138,7 +138,7 @@ pub struct BiquadFilterCoefficients<R> {
 }
 
 #[cfg(feature = "serde")]
-impl<T> PostcardValue<'_> for BiquadFilterCoefficients<T> where T: serde::Serialize + for<'de> serde::Deserialize<'de> {}
+impl<T> PostcardValue<'_> for BiquadFilterCoefficients<T> where T: Serialize + for<'de> Deserialize<'de> {}
 
 impl<T> Default for BiquadFilterCoefficients<T>
 where
@@ -469,6 +469,7 @@ mod tests {
         is_full::<BiquadFilterf32>();
         is_full::<BiquadFilterState<f32>>();
     }
+
     #[test]
     fn biquad_filter_f32() {
         let mut filter = BiquadFilterf32::default();
@@ -491,6 +492,7 @@ mod tests {
         assert_eq!(1.0, filter.update_weighted(1.0));
         assert_eq!(2.0, filter.update_weighted(2.0));
     }
+
     #[test]
     fn biquad_filter_vector3df32() {
         use vqm::Vector3df32;
@@ -520,6 +522,7 @@ mod tests {
         assert_eq!(1.0, filter.update_weighted(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
         assert_eq!(2.0, filter.update_weighted(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
     }
+
     #[test]
     fn test_notch_filter_attenuation_and_passthrough() {
         let sample_interval_s: f32 = 0.001; // 1 kHz sampling rate

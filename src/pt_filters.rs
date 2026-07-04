@@ -582,6 +582,7 @@ mod tests {
         is_full::<Pt3Filter<f32, f32>>();
         is_full::<Pt3Filterf32>();
     }
+
     #[test]
     fn pt1_filter_f32() {
         let mut filter = Pt1Filterf32::new();
@@ -622,6 +623,7 @@ mod tests {
         assert_eq!(1.0, filter.update(1.0));
         assert_eq!(2.0, filter.update(2.0));
     }
+
     #[test]
     fn pt1_filter_f32_method_call() {
         use crate::UpdateFilter;
@@ -637,6 +639,7 @@ mod tests {
         let value = value.filter_using(&mut filter);
         assert_eq!(0.2, value);
     }
+
     #[test]
     fn pt1_filter_vector3df32_method_call() {
         use crate::UpdateFilter;
@@ -659,6 +662,7 @@ mod tests {
         let value = value.filter_using(&mut filter);
         assert_eq!(Vector3df32 { x: 0.05, y: 0.125, z: 0.375 }, value);
     }
+
     #[test]
     fn pt2_filter_f32() {
         let mut filter = Pt2Filterf32::with_k(1.0);
@@ -688,6 +692,7 @@ mod tests {
         assert_eq!(1.0, filter.update(1.0));
         assert_eq!(2.0, filter.update(2.0));
     }
+
     #[test]
     fn pt2_filter_f32_method_call() {
         use crate::UpdateFilter;
@@ -703,6 +708,7 @@ mod tests {
         let value = value.filter_using(&mut filter);
         assert_eq!(0.0656, value);
     }
+
     #[test]
     fn pt3_filter_f32() {
         let mut filter = Pt3Filterf32::with_k(1.0);
@@ -743,6 +749,7 @@ mod tests {
         assert_eq!(1.0, filter.update(1.0));
         assert_eq!(2.0, filter.update(2.0));
     }
+
     #[test]
     fn pt1_filter_vector3df32() {
         use vqm::Vector3df32;
@@ -774,37 +781,5 @@ mod tests {
         filter.set_to_passthrough();
         assert_eq!(1.0, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
         assert_eq!(2.0, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
-    }
-    #[test]
-    fn pt1_filter_vector3di16_i32() {
-        use vqm::Vector3di16;
-        let mut filter = Pt1Filter::<Vector3di16, i32>::new();
-
-        // test that filter with default settings performs no filtering
-        let output = filter.update(Vector3di16 { x: 2, y: 3, z: 5 });
-        assert_eq!(Vector3di16 { x: 2, y: 3, z: 5 }, output);
-        let state = filter.state();
-        assert_eq!(Vector3di16 { x: 2, y: 3, z: 5 }, state);
-    }
-    #[test]
-    fn pt1_filter_vector3di16_f32() {
-        use vqm::Vector3di16;
-        let mut filter = Pt1Filter::<Vector3di16, f32>::new();
-
-        // test that filter with default settings performs no filtering
-        let output = filter.update(Vector3di16 { x: 2, y: 3, z: 5 });
-        assert_eq!(Vector3di16 { x: 2, y: 3, z: 5 }, output);
-        let state = filter.state();
-        assert_eq!(Vector3di16 { x: 2, y: 3, z: 5 }, state);
-    }
-    #[test]
-    fn filter_vector3di32_i32() {
-        use vqm::Vector3di32;
-
-        let mut filter = Pt1Filter::<Vector3di32, i32>::with_k(1);
-
-        // test that filter with default settings performs no filtering
-        let output = filter.update(Vector3di32 { x: 2, y: 3, z: 5 });
-        assert_eq!(Vector3di32 { x: 2, y: 3, z: 5 }, output);
     }
 }

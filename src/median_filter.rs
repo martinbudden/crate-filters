@@ -192,6 +192,7 @@ mod tests {
         is_full::<MedianFilter3<f32>>();
         is_full::<MedianFilter5<f32>>();
     }
+
     #[test]
     fn median3_spike_rejection() {
         //let mut filter = MovingAverageFilter::<f32, 3>::new();
@@ -253,6 +254,7 @@ mod tests {
         let output = filter.update(5.0);
         assert_eq!(5.0, output);
     }
+
     #[test]
     fn median5() {
         // Initialize with 0.0 (assuming T = f32)
@@ -281,6 +283,7 @@ mod tests {
         let output = filter.update(15.0);
         assert_eq!(15.0, output);
     }
+
     #[test]
     fn median5_reset() {
         let mut filter = MedianFilter5::<f32>::new();
