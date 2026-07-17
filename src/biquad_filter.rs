@@ -367,7 +367,7 @@ where
         let a0_reciprocal = R::one() / (R::one() + alpha);
 
         let b1 = (R::one() - cos_omega) * a0_reciprocal;
-        let b0 = self.coeffs.b1 * (R::one() / (R::one() + R::one()));
+        let b0 = b1 * (R::one() / (R::one() + R::one()));
         BiquadFilterCoefficients {
             b0,
             b1,
