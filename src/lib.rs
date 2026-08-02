@@ -1,7 +1,7 @@
 //#![cfg_attr(feature = "simd", feature(portable_simd))]
 #![doc = include_str!("../README.md")]
 // Conventions for generics used in this crate:
-//    T: general type, eg f32, Vector3d, Vector3df32, Quaternion etc
+//    T: general type, eg f32, Vector3, Vector3f32, Quaternion etc
 //    R: real number type ie f32 or f64
 //    F: filter type, eg Pt1Filter, BiquadFilter etc
 //#![doc(html_math_jax_enabled)]
@@ -35,8 +35,8 @@ mod rolling_buffer;
 mod slew_filter;
 
 pub use biquad_filter::BiquadFilter;
-pub use biquad_filter::{BiquadFilterVector2df32, BiquadFilterVector3df32, BiquadFilterVector4df32, BiquadFilterf32};
-pub use biquad_filter::{BiquadFilterVector2df64, BiquadFilterVector3df64, BiquadFilterVector4df64, BiquadFilterf64};
+pub use biquad_filter::{BiquadFilterVector2f32, BiquadFilterVector3f32, BiquadFilterVector4f32, BiquadFilterf32};
+pub use biquad_filter::{BiquadFilterVector2f64, BiquadFilterVector3f64, BiquadFilterVector4f64, BiquadFilterf64};
 
 pub use circular_buffer::CircularBuffer;
 
@@ -48,25 +48,23 @@ pub use median_filter::{MedianFilter3f64, MedianFilter5f64};
 
 pub use moving_average_filter::MovingAverageFilter;
 pub use moving_average_filter::{
-    MovingAverageFilterVector2df32, MovingAverageFilterVector3df32, MovingAverageFilterVector4df32,
-    MovingAverageFilterf32,
+    MovingAverageFilterVector2f32, MovingAverageFilterVector3f32, MovingAverageFilterVector4f32, MovingAverageFilterf32,
 };
 pub use moving_average_filter::{
-    MovingAverageFilterVector2df64, MovingAverageFilterVector3df64, MovingAverageFilterVector4df64,
-    MovingAverageFilterf64,
+    MovingAverageFilterVector2f64, MovingAverageFilterVector3f64, MovingAverageFilterVector4f64, MovingAverageFilterf64,
 };
 
 pub use pt_filters::Pt1Filter;
-pub use pt_filters::{Pt1FilterVector2df32, Pt1FilterVector3df32, Pt1FilterVector4df32, Pt1Filterf32};
-pub use pt_filters::{Pt1FilterVector2df64, Pt1FilterVector3df64, Pt1FilterVector4df64, Pt1Filterf64};
+pub use pt_filters::{Pt1FilterVector2f32, Pt1FilterVector3f32, Pt1FilterVector4f32, Pt1Filterf32};
+pub use pt_filters::{Pt1FilterVector2f64, Pt1FilterVector3f64, Pt1FilterVector4f64, Pt1Filterf64};
 
 pub use pt_filters::Pt2Filter;
-pub use pt_filters::{Pt2FilterVector2df32, Pt2FilterVector3df32, Pt2FilterVector4df32, Pt2Filterf32};
-pub use pt_filters::{Pt2FilterVector2df64, Pt2FilterVector3df64, Pt2FilterVector4df64, Pt2Filterf64};
+pub use pt_filters::{Pt2FilterVector2f32, Pt2FilterVector3f32, Pt2FilterVector4f32, Pt2Filterf32};
+pub use pt_filters::{Pt2FilterVector2f64, Pt2FilterVector3f64, Pt2FilterVector4f64, Pt2Filterf64};
 
 pub use pt_filters::Pt3Filter;
-pub use pt_filters::{Pt3FilterVector2df32, Pt3FilterVector3df32, Pt3FilterVector4df32, Pt3Filterf32};
-pub use pt_filters::{Pt3FilterVector2df64, Pt3FilterVector3df64, Pt3FilterVector4df64, Pt3Filterf64};
+pub use pt_filters::{Pt3FilterVector2f32, Pt3FilterVector3f32, Pt3FilterVector4f32, Pt3Filterf32};
+pub use pt_filters::{Pt3FilterVector2f64, Pt3FilterVector3f64, Pt3FilterVector4f64, Pt3Filterf64};
 
 pub use rolling_buffer::RollingBuffer;
 

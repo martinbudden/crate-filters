@@ -4,7 +4,7 @@
 ///
 /// `filter.update()` reads better than `filter.filter()`
 /// and it also avoids confusion with the filter function in the Iterator trait.
-use vqm::{Vector2df32, Vector2df64, Vector3df32, Vector3df64, Vector4df32, Vector4df64};
+use vqm::{Vector2f32, Vector2f64, Vector3f32, Vector3f64, Vector4f32, Vector4f64};
 
 #[allow(clippy::doc_paragraphs_missing_punctuation)]
 /// Filter Definition trait.
@@ -27,7 +27,7 @@ pub trait SignalFilter<T, F> {
     fn update(&mut self, input: T) -> T;
 }
 
-// `T` is the type being filtered, so it might be an `f32` or a `Vector3df32`
+// `T` is the type being filtered, so it might be an `f32` or a `Vector3f32`
 // `R` is the type of the filter's internal constant. It is either `f32` or `f64`
 // and should correspond to `T`.
 //
@@ -35,8 +35,8 @@ pub trait SignalFilter<T, F> {
 // * If `T` is `f32`, `R` is `f32`.
 //
 //  * If `T` is `f64`, `R` is `f64`.
-// * If `T` is `Vector3df32`, `R` is `f32`
-// * If `T` is `Vector3df64`, `R` is `f64`
+// * If `T` is `Vector3f32`, `R` is `f32`
+// * If `T` is `Vector3f64`, `R` is `f64`
 
 /// Adds `value.filter_using(&mut filter)` method call syntax to `SignalFilter`.
 /// ```
@@ -67,44 +67,44 @@ impl UpdateFilter<f64, f64> for f64 {
     }
 }
 
-impl UpdateFilter<Vector2df32, f32> for Vector2df32 {
-    fn filter_using<F: SignalFilter<Vector2df32, f32>>(self, filter: &mut F) -> Self {
-        // self is Vector2df32, filter.update handles the whole vector at once
+impl UpdateFilter<Vector2f32, f32> for Vector2f32 {
+    fn filter_using<F: SignalFilter<Vector2f32, f32>>(self, filter: &mut F) -> Self {
+        // self is Vector2f32, filter.update handles the whole vector at once
         filter.update(self)
     }
 }
 
-impl UpdateFilter<Vector2df64, f64> for Vector2df64 {
-    fn filter_using<F: SignalFilter<Vector2df64, f64>>(self, filter: &mut F) -> Self {
-        // self is Vector2df64, filter.update handles the whole vector at once
+impl UpdateFilter<Vector2f64, f64> for Vector2f64 {
+    fn filter_using<F: SignalFilter<Vector2f64, f64>>(self, filter: &mut F) -> Self {
+        // self is Vector2f64, filter.update handles the whole vector at once
         filter.update(self)
     }
 }
 
-impl UpdateFilter<Vector3df32, f32> for Vector3df32 {
-    fn filter_using<F: SignalFilter<Vector3df32, f32>>(self, filter: &mut F) -> Self {
-        // self is Vector3df32, filter.update handles the whole vector at once
+impl UpdateFilter<Vector3f32, f32> for Vector3f32 {
+    fn filter_using<F: SignalFilter<Vector3f32, f32>>(self, filter: &mut F) -> Self {
+        // self is Vector3f32, filter.update handles the whole vector at once
         filter.update(self)
     }
 }
 
-impl UpdateFilter<Vector3df64, f64> for Vector3df64 {
-    fn filter_using<F: SignalFilter<Vector3df64, f64>>(self, filter: &mut F) -> Self {
-        // self is Vector3df64, filter.update handles the whole vector at once
+impl UpdateFilter<Vector3f64, f64> for Vector3f64 {
+    fn filter_using<F: SignalFilter<Vector3f64, f64>>(self, filter: &mut F) -> Self {
+        // self is Vector3f64, filter.update handles the whole vector at once
         filter.update(self)
     }
 }
 
-impl UpdateFilter<Vector4df32, f32> for Vector4df32 {
-    fn filter_using<F: SignalFilter<Vector4df32, f32>>(self, filter: &mut F) -> Self {
-        // self is Vector4df32, filter.update handles the whole vector at once
+impl UpdateFilter<Vector4f32, f32> for Vector4f32 {
+    fn filter_using<F: SignalFilter<Vector4f32, f32>>(self, filter: &mut F) -> Self {
+        // self is Vector4f32, filter.update handles the whole vector at once
         filter.update(self)
     }
 }
 
-impl UpdateFilter<Vector4df64, f64> for Vector4df64 {
-    fn filter_using<F: SignalFilter<Vector4df64, f64>>(self, filter: &mut F) -> Self {
-        // self is Vector4df64, filter.update handles the whole vector at once
+impl UpdateFilter<Vector4f64, f64> for Vector4f64 {
+    fn filter_using<F: SignalFilter<Vector4f64, f64>>(self, filter: &mut F) -> Self {
+        // self is Vector4f64, filter.update handles the whole vector at once
         filter.update(self)
     }
 }

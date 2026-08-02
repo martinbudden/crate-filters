@@ -1,62 +1,62 @@
 use core::ops::{Div, Mul, Sub};
 use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
-use vqm::{MathConstants, Vector2d, Vector3d, Vector4d};
+use vqm::{MathConstants, Vector2, Vector3, Vector4};
 
 use crate::SignalFilter;
 
 /// `Pt1Filter` for `f32`<br>
 pub type Pt1Filterf32 = Pt1Filter<f32, f32>;
-/// `Pt1Filter` for `Vector2df32`<br>
-pub type Pt1FilterVector2df32 = Pt1Filter<Vector2d<f32>, f32>;
-/// `Pt1Filter` for `Vector3df32`<br>
-pub type Pt1FilterVector3df32 = Pt1Filter<Vector3d<f32>, f32>;
-/// `Pt1Filter` for `Vector4df32`<br>
-pub type Pt1FilterVector4df32 = Pt1Filter<Vector4d<f32>, f32>;
+/// `Pt1Filter` for `Vector2f32`<br>
+pub type Pt1FilterVector2f32 = Pt1Filter<Vector2<f32>, f32>;
+/// `Pt1Filter` for `Vector3f32`<br>
+pub type Pt1FilterVector3f32 = Pt1Filter<Vector3<f32>, f32>;
+/// `Pt1Filter` for `Vector4f32`<br>
+pub type Pt1FilterVector4f32 = Pt1Filter<Vector4<f32>, f32>;
 
 /// `Pt1Filter` for `f64`<br><br>
 pub type Pt1Filterf64 = Pt1Filter<f64, f64>;
-/// `Pt1Filter` for `Vector2df64`<br><br>
-pub type Pt1FilterVector2df64 = Pt1Filter<Vector2d<f64>, f64>;
-/// `Pt1Filter` for `Vector3df64`<br><br>
-pub type Pt1FilterVector3df64 = Pt1Filter<Vector3d<f64>, f64>;
-/// `Pt1Filter` for `Vector4df64`<br><br>
-pub type Pt1FilterVector4df64 = Pt1Filter<Vector4d<f64>, f64>;
+/// `Pt1Filter` for `Vector2f64`<br><br>
+pub type Pt1FilterVector2f64 = Pt1Filter<Vector2<f64>, f64>;
+/// `Pt1Filter` for `Vector3f64`<br><br>
+pub type Pt1FilterVector3f64 = Pt1Filter<Vector3<f64>, f64>;
+/// `Pt1Filter` for `Vector4f64`<br><br>
+pub type Pt1FilterVector4f64 = Pt1Filter<Vector4<f64>, f64>;
 
 /// `Pt2Filter` for `f32`<br>
 pub type Pt2Filterf32 = Pt2Filter<f32, f32>;
-/// `Pt2Filter` for `Vector2df32`<br>
-pub type Pt2FilterVector2df32 = Pt2Filter<Vector2d<f32>, f32>;
-/// `Pt2Filter` for `Vector3df32`<br>
-pub type Pt2FilterVector3df32 = Pt2Filter<Vector3d<f32>, f32>;
-/// `Pt2Filter` for `Vector4df32`<br>
-pub type Pt2FilterVector4df32 = Pt2Filter<Vector4d<f32>, f32>;
+/// `Pt2Filter` for `Vector2f32`<br>
+pub type Pt2FilterVector2f32 = Pt2Filter<Vector2<f32>, f32>;
+/// `Pt2Filter` for `Vector3f32`<br>
+pub type Pt2FilterVector3f32 = Pt2Filter<Vector3<f32>, f32>;
+/// `Pt2Filter` for `Vector4f32`<br>
+pub type Pt2FilterVector4f32 = Pt2Filter<Vector4<f32>, f32>;
 
 /// `Pt2Filter` for `f64`<br><br>
 pub type Pt2Filterf64 = Pt2Filter<f64, f64>;
-/// `Pt2Filter` for `Vector2df64`<br><br>
-pub type Pt2FilterVector2df64 = Pt2Filter<Vector2d<f64>, f64>;
-/// `Pt2Filter` for `Vector3df64`<br><br>
-pub type Pt2FilterVector3df64 = Pt2Filter<Vector3d<f64>, f64>;
-/// `Pt2Filter` for `Vector4df64`<br><br>
-pub type Pt2FilterVector4df64 = Pt2Filter<Vector4d<f64>, f64>;
+/// `Pt2Filter` for `Vector2f64`<br><br>
+pub type Pt2FilterVector2f64 = Pt2Filter<Vector2<f64>, f64>;
+/// `Pt2Filter` for `Vector3f64`<br><br>
+pub type Pt2FilterVector3f64 = Pt2Filter<Vector3<f64>, f64>;
+/// `Pt2Filter` for `Vector4f64`<br><br>
+pub type Pt2FilterVector4f64 = Pt2Filter<Vector4<f64>, f64>;
 
 /// `Pt3Filter` for `f32`<br>
 pub type Pt3Filterf32 = Pt3Filter<f32, f32>;
-/// `Pt3Filter` for `Vector2df32`<br>
-pub type Pt3FilterVector2df32 = Pt3Filter<Vector2d<f32>, f32>;
-/// `Pt3Filter` for `Vector3df32`<br>
-pub type Pt3FilterVector3df32 = Pt3Filter<Vector3d<f32>, f32>;
-/// `Pt3Filter` for `Vector4df32`<br>
-pub type Pt3FilterVector4df32 = Pt3Filter<Vector4d<f32>, f32>;
+/// `Pt3Filter` for `Vector2f32`<br>
+pub type Pt3FilterVector2f32 = Pt3Filter<Vector2<f32>, f32>;
+/// `Pt3Filter` for `Vector3f32`<br>
+pub type Pt3FilterVector3f32 = Pt3Filter<Vector3<f32>, f32>;
+/// `Pt3Filter` for `Vector4f32`<br>
+pub type Pt3FilterVector4f32 = Pt3Filter<Vector4<f32>, f32>;
 
 /// `Pt3Filter` for `f64`<br><br>
 pub type Pt3Filterf64 = Pt3Filter<f64, f64>;
-/// `Pt3Filter` for `Vector2df64`<br><br>
-pub type Pt3FilterVector2df64 = Pt3Filter<Vector2d<f64>, f64>;
-/// `Pt3Filter` for `Vector3df64`<br><br>
-pub type Pt3FilterVector3df64 = Pt3Filter<Vector3d<f64>, f64>;
-/// `Pt3Filter` for `Vector4df64`<br><br>
-pub type Pt3FilterVector4df64 = Pt3Filter<Vector4d<f64>, f64>;
+/// `Pt3Filter` for `Vector2f64`<br><br>
+pub type Pt3FilterVector2f64 = Pt3Filter<Vector2<f64>, f64>;
+/// `Pt3Filter` for `Vector3f64`<br><br>
+pub type Pt3FilterVector3f64 = Pt3Filter<Vector3<f64>, f64>;
+/// `Pt3Filter` for `Vector4f64`<br><br>
+pub type Pt3FilterVector4f64 = Pt3Filter<Vector4<f64>, f64>;
 
 #[allow(clippy::doc_paragraphs_missing_punctuation)]
 /// Discrete-time, first-order low-pass filter (Proportional Time element).
@@ -643,7 +643,7 @@ mod tests {
     #[test]
     fn pt1_filter_vector3df32_method_call() {
         use crate::UpdateFilter;
-        use vqm::Vector3df32;
+        use vqm::Vector3f32;
 
         let mut filter = Pt1Filterf32::with_k(0.25);
         assert_eq!(0.05, filter.update(0.2));
@@ -652,15 +652,15 @@ mod tests {
         filter.reset();
         assert_eq!(0.375, filter.update(1.5));
 
-        let mut filter = Pt1FilterVector3df32::with_k(0.25);
-        let value = Vector3df32 { x: 0.2, y: 0.5, z: 1.5 };
+        let mut filter = Pt1FilterVector3f32::with_k(0.25);
+        let value = Vector3f32 { x: 0.2, y: 0.5, z: 1.5 };
         let output = filter.update(value);
-        assert_eq!(Vector3df32 { x: 0.05, y: 0.125, z: 0.375 }, output);
+        assert_eq!(Vector3f32 { x: 0.05, y: 0.125, z: 0.375 }, output);
 
         filter.reset();
-        let value = Vector3df32 { x: 0.2, y: 0.5, z: 1.5 };
+        let value = Vector3f32 { x: 0.2, y: 0.5, z: 1.5 };
         let value = value.filter_using(&mut filter);
-        assert_eq!(Vector3df32 { x: 0.05, y: 0.125, z: 0.375 }, value);
+        assert_eq!(Vector3f32 { x: 0.05, y: 0.125, z: 0.375 }, value);
     }
 
     #[test]
@@ -752,34 +752,34 @@ mod tests {
 
     #[test]
     fn pt1_filter_vector3df32() {
-        use vqm::Vector3df32;
+        use vqm::Vector3f32;
 
-        let mut filter = Pt1Filter::<Vector3df32, f32>::with_k(1.0);
+        let mut filter = Pt1Filter::<Vector3f32, f32>::with_k(1.0);
 
         // test that filter with default settings performs no filtering
-        let output = filter.update(Vector3df32 { x: 2.0, y: 3.0, z: 5.0 });
-        assert_eq!(Vector3df32 { x: 2.0, y: 3.0, z: 5.0 }, output);
+        let output = filter.update(Vector3f32 { x: 2.0, y: 3.0, z: 5.0 });
+        assert_eq!(Vector3f32 { x: 2.0, y: 3.0, z: 5.0 }, output);
         let state = filter.state();
-        assert_eq!(Vector3df32 { x: 2.0, y: 3.0, z: 5.0 }, state);
+        assert_eq!(Vector3f32 { x: 2.0, y: 3.0, z: 5.0 }, state);
 
         filter.reset();
         let state = filter.state();
-        assert_eq!(Vector3df32 { x: 0.0, y: 0.0, z: 0.0 }, state);
+        assert_eq!(Vector3f32 { x: 0.0, y: 0.0, z: 0.0 }, state);
 
         filter.set_cutoff_frequency(100.0, 0.001);
-        assert_eq!(0.385_869_56, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(1.008_713_4, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(0.385_869_56, filter.update(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.008_713_4, filter.update(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
 
         filter.set_k(1.0);
-        assert_eq!(1.0, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(2.0, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.0, filter.update(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(2.0, filter.update(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
 
         filter.set_cutoff_frequency_and_reset(100.0, 0.001);
-        assert_eq!(0.385_869_56, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(1.008_713_4, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(0.385_869_56, filter.update(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.008_713_4, filter.update(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
 
         filter.set_to_passthrough();
-        assert_eq!(1.0, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(2.0, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.0, filter.update(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(2.0, filter.update(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
     }
 }

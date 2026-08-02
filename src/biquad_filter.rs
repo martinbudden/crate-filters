@@ -1,6 +1,6 @@
 use core::ops::{Add, Div, Mul, Neg, Sub};
 use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
-use vqm::{MathConstants, SqrtMethods, TrigonometricMethods, Vector2d, Vector3d, Vector4d};
+use vqm::{MathConstants, SqrtMethods, TrigonometricMethods, Vector2, Vector3, Vector4};
 #[cfg(feature = "serde")]
 use {
     sequential_storage::map::PostcardValue,
@@ -11,21 +11,21 @@ use crate::SignalFilter;
 
 /// `BiquadFilter` for `f32`<br>
 pub type BiquadFilterf32 = BiquadFilter<f32, f32>;
-/// `BiquadFilter` for `Vector2df32`<br>
-pub type BiquadFilterVector2df32 = BiquadFilter<Vector2d<f32>, f32>;
-/// `BiquadFilter` for `Vector3df32`<br>
-pub type BiquadFilterVector3df32 = BiquadFilter<Vector3d<f32>, f32>;
-/// `BiquadFilter` for `Vector4df32`<br>
-pub type BiquadFilterVector4df32 = BiquadFilter<Vector4d<f32>, f32>;
+/// `BiquadFilter` for `Vector2f32`<br>
+pub type BiquadFilterVector2f32 = BiquadFilter<Vector2<f32>, f32>;
+/// `BiquadFilter` for `Vector3f32`<br>
+pub type BiquadFilterVector3f32 = BiquadFilter<Vector3<f32>, f32>;
+/// `BiquadFilter` for `Vector4f32`<br>
+pub type BiquadFilterVector4f32 = BiquadFilter<Vector4<f32>, f32>;
 
 /// `BiquadFilter` for `f64`<br><br>
 pub type BiquadFilterf64 = BiquadFilter<f64, f64>;
-/// `BiquadFilter` for `Vector2df64`<br><br>
-pub type BiquadFilterVector2df64 = BiquadFilter<Vector2d<f64>, f64>;
-/// `BiquadFilter` for `Vector3df64`<br><br>
-pub type BiquadFilterVector3df64 = BiquadFilter<Vector3d<f64>, f64>;
-/// `BiquadFilter` for `Vector4df64`<br><br>
-pub type BiquadFilterVector4df64 = BiquadFilter<Vector4d<f64>, f64>;
+/// `BiquadFilter` for `Vector2f64`<br><br>
+pub type BiquadFilterVector2f64 = BiquadFilter<Vector2<f64>, f64>;
+/// `BiquadFilter` for `Vector3f64`<br><br>
+pub type BiquadFilterVector3f64 = BiquadFilter<Vector3<f64>, f64>;
+/// `BiquadFilter` for `Vector4f64`<br><br>
+pub type BiquadFilterVector4f64 = BiquadFilter<Vector4<f64>, f64>;
 
 #[allow(clippy::doc_paragraphs_missing_punctuation)]
 /// Second-order biquad IIR filter.<br><br>
@@ -495,13 +495,13 @@ mod tests {
 
     #[test]
     fn biquad_filter_vector3df32() {
-        use vqm::Vector3df32;
-        let mut filter = BiquadFilterVector3df32::default();
-        let mut state: BiquadFilterState<Vector3df32>;
+        use vqm::Vector3f32;
+        let mut filter = BiquadFilterVector3f32::default();
+        let mut state: BiquadFilterState<Vector3f32>;
 
         // test that filter with default settings performs no filtering
-        let output = filter.update(Vector3df32 { x: 2.0, y: 3.0, z: 5.0 });
-        assert_eq!(Vector3df32 { x: 2.0, y: 3.0, z: 5.0 }, output);
+        let output = filter.update(Vector3f32 { x: 2.0, y: 3.0, z: 5.0 });
+        assert_eq!(Vector3f32 { x: 2.0, y: 3.0, z: 5.0 }, output);
         state = filter.state();
         assert_eq!(0.0, state.w1.x);
         assert_eq!(0.0, state.w2.x);
@@ -510,17 +510,17 @@ mod tests {
         state = filter.state();
         assert_eq!(0.0, state.w1.x);
         assert_eq!(0.0, state.w2.x);
-        assert_eq!(4.0, filter.update(Vector3df32 { x: 4.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(4.0, filter.update(Vector3f32 { x: 4.0, y: 0.0, z: 0.0 }).x);
 
         filter.set_coefficients_and_weight(
             BiquadFilterCoefficients { a1: 2.0, a2: 3.0, b0: 5.0, b1: 7.0, b2: 11.0 },
             13.0,
         );
         filter.set_to_passthrough();
-        assert_eq!(1.0, filter.update(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(2.0, filter.update(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(1.0, filter.update_weighted(Vector3df32 { x: 1.0, y: 0.0, z: 0.0 }).x);
-        assert_eq!(2.0, filter.update_weighted(Vector3df32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.0, filter.update(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(2.0, filter.update(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(1.0, filter.update_weighted(Vector3f32 { x: 1.0, y: 0.0, z: 0.0 }).x);
+        assert_eq!(2.0, filter.update_weighted(Vector3f32 { x: 2.0, y: 0.0, z: 0.0 }).x);
     }
 
     #[test]

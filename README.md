@@ -38,9 +38,9 @@ So for `Pt1Filter` we have:
 
 | vector `f32`            | vector `f64`          |
 | ----------------------- | ----------------------|
-| `Pt1FilterVector2df32`  |`Pt1FilterVector2df64` |
-| `Pt1FilterVector3df32`  |`Pt1FilterVector3df64` |
-| `Pt1FilterVector4df32`  |`Pt1FilterVector4df64` |
+| `Pt1FilterVector2f32`  |`Pt1FilterVector2f64` |
+| `Pt1FilterVector3f32`  |`Pt1FilterVector3f64` |
+| `Pt1FilterVector4f32`  |`Pt1FilterVector4f64` |
 
 and similarly for the other filters.
 
@@ -64,11 +64,11 @@ These filters have been developed for use in stabilized vehicles (self balancing
 
 ```rust
 use signal_filters::Pt1Filterf32;
-use signal_filters::Pt1FilterVector3df32;
+use signal_filters::Pt1FilterVector3f32;
 use signal_filters::BiquadFilterf32;
-use signal_filters::BiquadFilterVector3df32;
+use signal_filters::BiquadFilterVector3f32;
 use signal_filters::SignalFilter;
-use vqm::Vector3df32;
+use vqm::Vector3f32;
 
 //
 // Pt1 low pass filter.
@@ -83,10 +83,10 @@ let output = filter.update(input);
 //
 // Pt1 low pass filter with vector input.
 //
-let mut filter = Pt1FilterVector3df32::new();
+let mut filter = Pt1FilterVector3f32::new();
 filter.set_cutoff_frequency(80.0, sample_interval_s);
 
-let gyro = Vector3df32 { x: 0.2, y: 0.5, z: 1.5 };
+let gyro = Vector3f32 { x: 0.2, y: 0.5, z: 1.5 };
 let output = filter.update(gyro);
 
 //
@@ -117,10 +117,10 @@ let output = notch_filter.update(input);
 //
 // Biquad notch filter with vector input.
 //
-let mut notch_filter = BiquadFilterVector3df32::with_q_and_sample_interval(q_factor, sample_interval_s);
+let mut notch_filter = BiquadFilterVector3f32::with_q_and_sample_interval(q_factor, sample_interval_s);
 notch_filter.set_notch_frequency_assuming_q(notch_frequency_hz);
 
-let gyro = Vector3df32 { x: 0.8, y: 2.1, z: -0.2 };
+let gyro = Vector3f32 { x: 0.8, y: 2.1, z: -0.2 };
 let output = notch_filter.update(gyro);
 ```
 

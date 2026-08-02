@@ -2,25 +2,25 @@
 
 use core::ops::{Add, Mul, Sub};
 use num_traits::{ConstZero, Zero};
-use vqm::{Vector2d, Vector3d, Vector4d};
+use vqm::{Vector2, Vector3, Vector4};
 
 /// `MovingAverageFilter` for `f32`<br>
 pub type MovingAverageFilterf32<const N: usize> = MovingAverageFilter<f32, N>;
-/// `MovingAverageFilter` for `Vector2df32`<br>
-pub type MovingAverageFilterVector2df32<const N: usize> = MovingAverageFilter<Vector2d<f32>, N>;
-/// `MovingAverageFilter` for `Vector3df32`<br>
-pub type MovingAverageFilterVector3df32<const N: usize> = MovingAverageFilter<Vector3d<f32>, N>;
-/// `MovingAverageFilter` for `Vector4df32`<br>
-pub type MovingAverageFilterVector4df32<const N: usize> = MovingAverageFilter<Vector4d<f32>, N>;
+/// `MovingAverageFilter` for `Vector2f32`<br>
+pub type MovingAverageFilterVector2f32<const N: usize> = MovingAverageFilter<Vector2<f32>, N>;
+/// `MovingAverageFilter` for `Vector3f32`<br>
+pub type MovingAverageFilterVector3f32<const N: usize> = MovingAverageFilter<Vector3<f32>, N>;
+/// `MovingAverageFilter` for `Vector4f32`<br>
+pub type MovingAverageFilterVector4f32<const N: usize> = MovingAverageFilter<Vector4<f32>, N>;
 
 /// `MovingAverageFilter` for `f64`<br><br>
 pub type MovingAverageFilterf64<const N: usize> = MovingAverageFilter<f64, N>;
-/// `MovingAverageFilter` for `Vector2df64`<br><br>
-pub type MovingAverageFilterVector2df64<const N: usize> = MovingAverageFilter<Vector2d<f64>, N>;
-/// `MovingAverageFilter` for `Vector3df64`<br><br>
-pub type MovingAverageFilterVector3df64<const N: usize> = MovingAverageFilter<Vector3d<f64>, N>;
-/// `MovingAverageFilter` for `Vector4df64`<br><br>
-pub type MovingAverageFilterVector4df64<const N: usize> = MovingAverageFilter<Vector4d<f64>, N>;
+/// `MovingAverageFilter` for `Vector2f64`<br><br>
+pub type MovingAverageFilterVector2f64<const N: usize> = MovingAverageFilter<Vector2<f64>, N>;
+/// `MovingAverageFilter` for `Vector3f64`<br><br>
+pub type MovingAverageFilterVector3f64<const N: usize> = MovingAverageFilter<Vector3<f64>, N>;
+/// `MovingAverageFilter` for `Vector4f64`<br><br>
+pub type MovingAverageFilterVector4f64<const N: usize> = MovingAverageFilter<Vector4<f64>, N>;
 
 /// Simple moving average filter.<br><br>
 // See [Moving Average Filter - Theory and Software Implementation - Phil's Lab #21](https://www.youtube.com/watch?v=rttn46_Y3c8).
@@ -116,37 +116,37 @@ mod tests {
 
     #[test]
     fn moving_average_filter_vector3df32() {
-        use vqm::Vector3df32;
-        let mut filter = MovingAverageFilter::<Vector3df32, 4>::new();
-        let mut m = filter.update(Vector3df32 { x: 1.0, y: 0.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 1.0, y: 0.0, z: -3.0 }, m);
+        use vqm::Vector3f32;
+        let mut filter = MovingAverageFilter::<Vector3f32, 4>::new();
+        let mut m = filter.update(Vector3f32 { x: 1.0, y: 0.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 1.0, y: 0.0, z: -3.0 }, m);
 
-        m = filter.update(Vector3df32 { x: 2.0, y: 0.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 1.5, y: 0.0, z: -3.0 }, m);
+        m = filter.update(Vector3f32 { x: 2.0, y: 0.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 1.5, y: 0.0, z: -3.0 }, m);
 
-        m = filter.update(Vector3df32 { x: 3.0, y: 3.0, z: 0.0 });
-        assert_eq!(Vector3df32 { x: 2.0, y: 1.0, z: -2.0 }, m);
+        m = filter.update(Vector3f32 { x: 3.0, y: 3.0, z: 0.0 });
+        assert_eq!(Vector3f32 { x: 2.0, y: 1.0, z: -2.0 }, m);
 
-        m = filter.update(Vector3df32 { x: 4.0, y: 2.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 2.5, y: 1.25, z: -2.25 }, m);
+        m = filter.update(Vector3f32 { x: 4.0, y: 2.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 2.5, y: 1.25, z: -2.25 }, m);
 
-        m = filter.update(Vector3df32 { x: 5.0, y: 2.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 3.5, y: 1.75, z: -2.25 }, m);
+        m = filter.update(Vector3f32 { x: 5.0, y: 2.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 3.5, y: 1.75, z: -2.25 }, m);
 
-        m = filter.update(Vector3df32 { x: 6.0, y: 2.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 4.5, y: 2.25, z: -2.25 }, m);
+        m = filter.update(Vector3f32 { x: 6.0, y: 2.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 4.5, y: 2.25, z: -2.25 }, m);
 
-        m = filter.update(Vector3df32 { x: 10.0, y: 2.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 6.25, y: 2.0, z: -3.0 }, m);
+        m = filter.update(Vector3f32 { x: 10.0, y: 2.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 6.25, y: 2.0, z: -3.0 }, m);
 
         filter.reset();
-        m = filter.update(Vector3df32 { x: 4.0, y: 2.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 4.0, y: 2.0, z: -3.0 }, m);
+        m = filter.update(Vector3f32 { x: 4.0, y: 2.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 4.0, y: 2.0, z: -3.0 }, m);
 
-        m = filter.update(Vector3df32 { x: 20.0, y: 0.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 12.0, y: 1.0, z: -3.0 }, m);
+        m = filter.update(Vector3f32 { x: 20.0, y: 0.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 12.0, y: 1.0, z: -3.0 }, m);
 
-        m = filter.update(Vector3df32 { x: -9.0, y: 0.0, z: -3.0 });
-        assert_eq!(Vector3df32 { x: 5.0, y: 2.0 / 3.0, z: -3.0 }, m);
+        m = filter.update(Vector3f32 { x: -9.0, y: 0.0, z: -3.0 });
+        assert_eq!(Vector3f32 { x: 5.0, y: 2.0 / 3.0, z: -3.0 }, m);
     }
 }
