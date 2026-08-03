@@ -526,7 +526,7 @@ mod tests {
     #[test]
     fn test_notch_filter_attenuation_and_passthrough() {
         let sample_interval_s: f32 = 0.001; // 1 kHz sampling rate
-        let notch_frequency: f32 = 50.0; // 50 Hz powerline hum filter
+        let notch_frequency: f32 = 50.0; // 50 Hz power line hum filter
         let q_factor: f32 = 10.0; // Narrow notch width
 
         // Initialize two identical filters to test different signals
@@ -634,7 +634,7 @@ mod tests {
     fn test_notch_filter_reset() {
         #![allow(clippy::excessive_precision)]
         let sample_interval_s: f32 = 0.001; // 1 kHz sampling rate
-        let notch_freq: f32 = 60.0; // 50 Hz powerline hum filter
+        let notch_freq: f32 = 60.0; // 50 Hz power line hum filter
         let q_factor: f32 = 1.0; // Narrow notch width
 
         let mut filter = BiquadFilter::with_q_and_sample_interval(q_factor, sample_interval_s);

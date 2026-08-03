@@ -105,7 +105,7 @@ let output = notch_filter.update(input);
 //
 // Biquad filter used as notch filter.
 //
-let notch_frequency_hz: f32 = 50.0; // 50 Hz powerline hum filter
+let notch_frequency_hz: f32 = 50.0; // 50 Hz power line hum filter
 let q_factor: f32 = 10.0; // Narrow notch width
 
 let mut notch_filter = BiquadFilterf32::with_q_and_sample_interval(q_factor, sample_interval_s);
