@@ -23,6 +23,13 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Security
 
+## [0.1.10] - 2026-08-04
+
+### Changed
+
+- Updated to vqm version 0.1.14.
+- Fixed biquad lowpass b0 calculation.
+
 ## [0.1.9] - 2026-07-04
 
 ### Changed
