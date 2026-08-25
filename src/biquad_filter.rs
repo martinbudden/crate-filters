@@ -3,6 +3,7 @@ use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
 use vqm::{MathConstants, SqrtMethods, TrigonometricMethods, Vector2, Vector3, Vector4};
 #[cfg(feature = "serde")]
 use {
+    postcard::experimental::max_size::MaxSize,
     sequential_storage::map::PostcardValue,
     serde::{Deserialize, Serialize},
 };
@@ -128,7 +129,7 @@ where
 /// NOTE: b2 == b0 for lowpass filter.
 /// NOTE: b2 == b0 and a1 == b1 for notch filter.
 #[derive(Clone, Copy, Debug, PartialEq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize, MaxSize))]
 pub struct BiquadFilterCoefficients<R> {
     pub a1: R,
     pub a2: R,
@@ -138,7 +139,7 @@ pub struct BiquadFilterCoefficients<R> {
 }
 
 #[cfg(feature = "serde")]
-impl<T> PostcardValue<'_> for BiquadFilterCoefficients<T> where T: Serialize + for<'de> Deserialize<'de> {}
+impl<T> PostcardValue<'_> for BiquadFilterCoefficients<T> where T: Serialize + MaxSize + for<'de> Deserialize<'de> {}
 
 impl<T> Default for BiquadFilterCoefficients<T>
 where
@@ -441,6 +442,27 @@ where
     }
 }
 
+#[cfg(test)]
+mod test_traits {
+    use super::*;
+
+    fn _is_normal<T: Sized + Send + Sync + Unpin>() {}
+    fn is_full<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
+    fn _is_full_eq<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + Eq + PartialEq>() {}
+    #[cfg(feature = "serde")]
+    fn is_config<T: Serialize + MaxSize + for<'a> Deserialize<'a> + for<'a> PostcardValue<'a>>() {}
+
+    #[test]
+    fn normal_types() {
+        is_full::<BiquadFilter<f32, f32>>();
+        is_full::<BiquadFilterf32>();
+        is_full::<BiquadFilterState<f32>>();
+        is_full::<BiquadFilterCoefficients<f32>>();
+        #[cfg(feature = "serde")]
+        is_config::<BiquadFilterCoefficients<f32>>();
+    }
+}
+
 #[cfg(any(debug_assertions, test))]
 mod tests {
     #![allow(clippy::float_cmp)]
@@ -456,18 +478,6 @@ mod tests {
                 $right
             );
         };
-    }
-
-    #[allow(unused)]
-    fn is_normal<T: Sized + Send + Sync + Unpin>() {}
-    #[allow(unused)]
-    fn is_full<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
-
-    #[test]
-    fn normal_types() {
-        is_full::<BiquadFilter<f32, f32>>();
-        is_full::<BiquadFilterf32>();
-        is_full::<BiquadFilterState<f32>>();
     }
 
     #[test]

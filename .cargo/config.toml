@@ -22,4 +22,6 @@ rustflags = [
 # Optional: Set a default target so you don't have to pass --target to cargo every time
 # target = "thumbv8m.main-none-eabihf" 
 
-
+[alias]
+# Run using: 'cargo test-serde'
+test-serde = "test --features serde"
