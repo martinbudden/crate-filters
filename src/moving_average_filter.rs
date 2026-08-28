@@ -81,22 +81,23 @@ where
     }
 }
 
-#[cfg(any(debug_assertions, test))]
-mod tests {
-    #![allow(clippy::float_cmp)]
-    #[allow(unused)]
+#[cfg(test)]
+mod test_traits {
     use super::*;
 
-    #[allow(unused)]
-    fn is_normal<T: Sized + Send + Sync + Unpin>() {}
-    #[allow(unused)]
     fn is_full<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
 
     #[test]
     fn normal_types() {
         is_full::<MovingAverageFilter<f32, 2>>();
     }
+}
 
+#[cfg(any(debug_assertions, test))]
+mod tests {
+    #![allow(clippy::float_cmp)]
+    #[allow(unused)]
+    use super::*;
     #[test]
     fn moving_average_filter_f32() {
         let mut filter = MovingAverageFilter::<f32, 3>::new();

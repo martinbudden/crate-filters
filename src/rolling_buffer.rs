@@ -118,20 +118,22 @@ where
     }
 }
 
-#[cfg(any(debug_assertions, test))]
-mod tests {
-    #[allow(unused)]
+#[cfg(test)]
+mod test_traits {
     use super::*;
 
-    #[allow(unused)]
-    fn is_normal<T: Send + Sized + Sync + Unpin>() {}
-    #[allow(unused)]
     fn is_full<T: Send + Sized + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
 
     #[test]
     fn normal_types() {
         is_full::<RollingBuffer<f32, 2>>();
     }
+}
+
+#[cfg(any(debug_assertions, test))]
+mod tests {
+    #[allow(unused)]
+    use super::*;
 
     #[test]
     fn new() {

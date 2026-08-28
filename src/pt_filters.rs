@@ -560,17 +560,10 @@ where
     }
 }
 
-#[cfg(any(debug_assertions, test))]
-mod tests {
-    #![allow(clippy::float_cmp)]
-    #![allow(unused_results)]
-
-    #[allow(unused)]
+#[cfg(test)]
+mod test_traits {
     use super::*;
 
-    #[allow(unused)]
-    fn is_normal<T: Sized + Send + Sync + Unpin>() {}
-    #[allow(unused)]
     fn is_full<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
 
     #[test]
@@ -582,6 +575,15 @@ mod tests {
         is_full::<Pt3Filter<f32, f32>>();
         is_full::<Pt3Filterf32>();
     }
+}
+
+#[cfg(any(debug_assertions, test))]
+mod tests {
+    #![allow(clippy::float_cmp)]
+    #![allow(unused_results)]
+
+    #[allow(unused)]
+    use super::*;
 
     #[test]
     fn pt1_filter_f32() {

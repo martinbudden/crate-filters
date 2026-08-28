@@ -178,13 +178,9 @@ where
 }
 
 #[cfg(test)]
-mod tests {
-    #![allow(clippy::float_cmp)]
-    #![allow(unused_results)]
+mod test_traits {
     use super::*;
 
-    #[allow(unused)]
-    fn is_normal<T: Sized + Send + Sync + Unpin>() {}
     fn is_full<T: Sized + Send + Sync + Unpin + Copy + Clone + Default + PartialEq>() {}
 
     #[test]
@@ -192,6 +188,13 @@ mod tests {
         is_full::<MedianFilter3<f32>>();
         is_full::<MedianFilter5<f32>>();
     }
+}
+
+#[cfg(test)]
+mod tests {
+    #![allow(clippy::float_cmp)]
+    #![allow(unused_results)]
+    use super::*;
 
     #[test]
     fn median3_spike_rejection() {
