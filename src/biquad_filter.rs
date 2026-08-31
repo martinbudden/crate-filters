@@ -1,6 +1,6 @@
 use core::ops::{Add, Div, Mul, Neg, Sub};
 use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
-use vqm::{MathConstants, SqrtMethods, TrigonometricMethods, Vector2, Vector3, Vector4};
+use vqm::{SqrtMethods, TrigonometricMethods, Vector2, Vector3, Vector4};
 #[cfg(feature = "serde")]
 use {
     postcard::experimental::max_size::MaxSize,
@@ -27,6 +27,21 @@ pub type BiquadFilterVector2f64 = BiquadFilter<Vector2<f64>, f64>;
 pub type BiquadFilterVector3f64 = BiquadFilter<Vector3<f64>, f64>;
 /// `BiquadFilter` for `Vector4f64`<br><br>
 pub type BiquadFilterVector4f64 = BiquadFilter<Vector4<f64>, f64>;
+
+pub trait BiquadFilterConstants {
+    const PI: Self;
+    const HALF: Self;
+}
+
+impl BiquadFilterConstants for f32 {
+    const PI: Self = core::f32::consts::PI;
+    const HALF: Self = 0.5;
+}
+
+impl BiquadFilterConstants for f64 {
+    const PI: Self = core::f64::consts::PI;
+    const HALF: Self = 0.5;
+}
 
 #[allow(clippy::doc_paragraphs_missing_punctuation)]
 /// Second-order biquad IIR filter.<br><br>
@@ -56,7 +71,7 @@ pub struct BiquadFilter<T, R> {
 impl<T, R> Default for BiquadFilter<T, R>
 where
     T: Copy + ConstZero,
-    R: Copy + Zero + One + ConstZero + ConstOne + MathConstants + Div<R, Output = R>,
+    R: Copy + Zero + One + ConstZero + ConstOne + BiquadFilterConstants + Div<R, Output = R>,
 {
     fn default() -> Self {
         Self::new()
@@ -66,7 +81,7 @@ where
 impl<T, R> BiquadFilter<T, R>
 where
     T: Copy + ConstZero,
-    R: Copy + Zero + One + ConstZero + ConstOne + MathConstants + Div<R, Output = R>,
+    R: Copy + Zero + One + ConstZero + ConstOne + BiquadFilterConstants + Div<R, Output = R>,
 {
     /// Constructor.
     #[must_use]
@@ -109,7 +124,7 @@ where
 impl<T, R> BiquadFilter<T, R>
 where
     T: Copy,
-    R: Copy + Zero + One + MathConstants + Div<R, Output = R>,
+    R: Copy + Zero + One + BiquadFilterConstants + Div<R, Output = R>,
 {
     pub fn set_q(&mut self, q: R) {
         self.q = q;
@@ -304,7 +319,7 @@ where
         + One
         + PartialOrd
         + Neg<Output = R>
-        + MathConstants
+        + BiquadFilterConstants
         + TrigonometricMethods
         + SqrtMethods
         + Div<R, Output = R>

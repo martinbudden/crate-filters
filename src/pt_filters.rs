@@ -1,6 +1,6 @@
 use core::ops::{Div, Mul, Sub};
 use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
-use vqm::{MathConstants, Vector2, Vector3, Vector4};
+use vqm::{Vector2, Vector3, Vector4};
 
 use crate::SignalFilter;
 
@@ -57,6 +57,30 @@ pub type Pt3FilterVector2f64 = Pt3Filter<Vector2<f64>, f64>;
 pub type Pt3FilterVector3f64 = Pt3Filter<Vector3<f64>, f64>;
 /// `Pt3Filter` for `Vector4f64`<br><br>
 pub type Pt3FilterVector4f64 = Pt3Filter<Vector4<f64>, f64>;
+
+pub trait PtFilterConstants {
+    const PI: Self;
+    // FilterPt<n> cutoff correction = 1/sqrt(2^(1/n) - 1)
+    const PT2_CUTOFF_CORRECTION: Self;
+    const PT3_CUTOFF_CORRECTION: Self;
+    const HALF: Self;
+}
+
+#[allow(clippy::excessive_precision)]
+impl PtFilterConstants for f32 {
+    const PI: Self = core::f32::consts::PI;
+    const PT2_CUTOFF_CORRECTION: Self = 1.553_773_974;
+    const PT3_CUTOFF_CORRECTION: Self = 1.961_459_177;
+    const HALF: Self = 0.5;
+}
+
+#[allow(clippy::excessive_precision)]
+impl PtFilterConstants for f64 {
+    const PI: Self = core::f64::consts::PI;
+    const PT2_CUTOFF_CORRECTION: Self = 1.553_773_974;
+    const PT3_CUTOFF_CORRECTION: Self = 1.961_459_177;
+    const HALF: Self = 0.5;
+}
 
 #[allow(clippy::doc_paragraphs_missing_punctuation)]
 /// Discrete-time, first-order low-pass filter (Proportional Time element).
@@ -179,7 +203,7 @@ where
 impl<T, R> Pt1Filter<T, R>
 where
     T: Copy + Zero + Sub<Output = T> + MulAdd<R, T, Output = T>,
-    R: Copy + Zero + One + MathConstants + PartialOrd + Div<R, Output = R>,
+    R: Copy + Zero + One + PtFilterConstants + PartialOrd + Div<R, Output = R>,
 {
     pub fn set_cutoff_frequency(&mut self, cutoff_frequency_hz: R, delta_t: R) {
         self.k = Self::gain_from_frequency(cutoff_frequency_hz, delta_t);
@@ -210,7 +234,7 @@ where
 impl<T, R> Pt1Filter<T, R>
 where
     T: Copy + Zero + Sub<Output = T> + Mul<R, Output = T> + Div<R, Output = T> + MulAdd<R, T, Output = T>,
-    R: Copy + Zero + One + MathConstants + PartialOrd + Sub<Output = R> + Div<R, Output = R>,
+    R: Copy + Zero + One + PtFilterConstants + PartialOrd + Sub<Output = R> + Div<R, Output = R>,
 {
     /// Updates the cutoff frequency seamlessly, ie without discontinuity in output.
     pub fn set_cutoff_frequency_seamless(&mut self, cutoff_frequency_hz: R, delta_t: R, last_input: T) {
@@ -361,7 +385,7 @@ where
 impl<T, R> Pt2Filter<T, R>
 where
     T: Copy + Zero + Sub<Output = T> + MulAdd<R, T, Output = T>,
-    R: Copy + Zero + One + MathConstants + PartialOrd + Div<R, Output = R>,
+    R: Copy + Zero + One + PtFilterConstants + PartialOrd + Div<R, Output = R>,
 {
     pub fn set_cutoff_frequency(&mut self, cutoff_frequency_hz: R, delta_t: R) {
         self.k = Self::gain_from_frequency(cutoff_frequency_hz, delta_t);
@@ -373,18 +397,18 @@ where
     }
 
     pub fn gain_from_delay(delay: R, delta_t: R) -> R {
-        Pt1Filter::<T, R>::gain_from_delay(delay * R::FILTER_PT2_CUTOFF_CORRECTION, delta_t)
+        Pt1Filter::<T, R>::gain_from_delay(delay * R::PT2_CUTOFF_CORRECTION, delta_t)
     }
     pub fn gain_from_frequency(cutoff_frequency_hz: R, delta_t: R) -> R {
         // shift cutoffFrequency to satisfy -3dB cutoff condition
-        Pt1Filter::<T, R>::gain_from_frequency(cutoff_frequency_hz * R::FILTER_PT2_CUTOFF_CORRECTION, delta_t)
+        Pt1Filter::<T, R>::gain_from_frequency(cutoff_frequency_hz * R::PT2_CUTOFF_CORRECTION, delta_t)
     }
 }
 
 impl<T, R> Pt2Filter<T, R>
 where
     T: Copy + Zero + Sub<Output = T> + Div<R, Output = T> + Mul<R, Output = T> + MulAdd<R, T, Output = T>,
-    R: Copy + Zero + One + MathConstants + PartialOrd + Sub<Output = R> + Div<R, Output = R>,
+    R: Copy + Zero + One + PtFilterConstants + PartialOrd + Sub<Output = R> + Div<R, Output = R>,
 {
     /// Seamlessly updates the cutoff frequency for the second-order filter
     /// by recalculating historical internal states to eliminate signal "pops".
@@ -539,7 +563,7 @@ where
 impl<T, R> Pt3Filter<T, R>
 where
     T: Copy + Zero + Sub<Output = T> + MulAdd<R, T, Output = T>,
-    R: Copy + Zero + One + MathConstants + PartialOrd + Div<R, Output = R>,
+    R: Copy + Zero + One + PtFilterConstants + PartialOrd + Div<R, Output = R>,
 {
     pub fn set_cutoff_frequency(&mut self, cutoff_frequency_hz: R, delta_t: R) {
         self.k = Self::gain_from_frequency(cutoff_frequency_hz, delta_t);
@@ -551,12 +575,12 @@ where
     }
 
     pub fn gain_from_delay(delay: R, delta_t: R) -> R {
-        Pt1Filter::<T, R>::gain_from_delay(delay * R::FILTER_PT3_CUTOFF_CORRECTION, delta_t)
+        Pt1Filter::<T, R>::gain_from_delay(delay * R::PT3_CUTOFF_CORRECTION, delta_t)
     }
 
     pub fn gain_from_frequency(cutoff_frequency_hz: R, delta_t: R) -> R {
         // shift cutoffFrequency to satisfy -3dB cutoff condition
-        Pt1Filter::<T, R>::gain_from_frequency(cutoff_frequency_hz * R::FILTER_PT3_CUTOFF_CORRECTION, delta_t)
+        Pt1Filter::<T, R>::gain_from_frequency(cutoff_frequency_hz * R::PT3_CUTOFF_CORRECTION, delta_t)
     }
 }
 
