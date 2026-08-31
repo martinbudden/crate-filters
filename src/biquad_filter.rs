@@ -1,6 +1,6 @@
 use core::ops::{Add, Div, Mul, Neg, Sub};
 use num_traits::{ConstOne, ConstZero, MulAdd, One, Zero};
-use vqm::{SqrtMethods, TrigonometricMethods, Vector2, Vector3, Vector4};
+use vqm::{MathMethods, Vector2, Vector3, Vector4};
 #[cfg(feature = "serde")]
 use {
     postcard::experimental::max_size::MaxSize,
@@ -320,8 +320,7 @@ where
         + PartialOrd
         + Neg<Output = R>
         + BiquadFilterConstants
-        + TrigonometricMethods
-        + SqrtMethods
+        + MathMethods
         + Div<R, Output = R>
         + Sub<R, Output = R>,
 {
