@@ -23,25 +23,36 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Security
 
+## [0.1.11] - 2026-08-01
+
+### Added
+
+- support for `postcard` `MaxSize`.
+
+### Changed
+
+- updated to `vqm` version `0.1.15`.
+- updated to `sequential-storage` `8.0.1`.
+
 ## [0.1.10] - 2026-08-04
 
 ### Changed
 
-- Updated to vqm version 0.1.14.
+- Updated to `vqm` version `0.1.14`.
 - Fixed biquad lowpass b0 calculation.
 
 ## [0.1.9] - 2026-07-04
 
 ### Changed
 
-- Updated to vqm version 0.1.13.
+- Updated to `vqm` version `0.1.13`.
 - Tidied test code.
 
 ## [0.1.8] - 2026-06-06
 
 ### Changed
 
-- Updated to vqm version 0.1.11.
+- Updated to `vqm` version `0.1.11`.
 - Improved serialization.
 
 ## [0.1.7] - 2026-05-29
@@ -52,7 +63,7 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Changed
 
-- Updated to vqm version 0.1.10.
+- Updated to `vqm` version `0.1.10`.
 - Renamed `set_loop_time` to `set_sample_interval`.
 - Use sample_interval rather than sample_rate in constructors.
 
@@ -67,7 +78,7 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Changed
 
-- Updated to `vqm` version 0.1.8.
+- Updated to `vqm` version `0.1.8`.
 
 ### Added
 
@@ -84,7 +95,7 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Changed
 
-- Updated to `vqm` version 0.1.7.
+- Updated to `vqm` version `0.1.7`.
 - Improved handling of features in `Cargo.toml`.
 - Made `k` and `state` PtFilter accessor functions public.
 - Used `mul_add` in PtFilter `update` functions for speed and accuracy.
@@ -96,7 +107,7 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Changed
 
-- Use vqm version 0.1.5
+- Use `vqm` version `0.1.5`
 - `new` and other constructors to be `const`.
 - Grouped `BiquadFilter` coefficients into a `struct`.
 - Improved documentation.
@@ -105,13 +116,13 @@ Once the API has stabilized this project will adopt semantic versioning, the fir
 
 ### Changed
 
-- Use vqm version 0.1.3
+- Use `vqm` version `0.1.3`
 
 ## [0.1.2] - 2026-05-02
 
 ### Changed
 
-- Use vqm version 0.1.2
+- Use `vqm` version `0.1.2`
 
 ## [0.1.1] - 2026-04-26
 

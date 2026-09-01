@@ -38,9 +38,9 @@ So for `Pt1Filter` we have:
 
 | vector `f32`            | vector `f64`          |
 | ----------------------- | ----------------------|
-| `Pt1FilterVector2f32`  |`Pt1FilterVector2f64` |
-| `Pt1FilterVector3f32`  |`Pt1FilterVector3f64` |
-| `Pt1FilterVector4f32`  |`Pt1FilterVector4f64` |
+| `Pt1FilterVector2f32`   |`Pt1FilterVector2f64`  |
+| `Pt1FilterVector3f32`   |`Pt1FilterVector3f64`  |
+| `Pt1FilterVector4f32`   |`Pt1FilterVector4f64`  |
 
 and similarly for the other filters.
 
